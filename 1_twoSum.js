@@ -17,7 +17,7 @@
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function(nums, target) {
+var twoSum0 = function(nums, target) {
     for(var i = 0, len = nums.length; i < len; i++){
         for(var j = i + 1; j < len; j++){
             if(nums[i] + nums[j] === target){
@@ -26,6 +26,24 @@ var twoSum = function(nums, target) {
         }
     }
 };
+/**
+ * 这答案中规中矩,跑赢了49.29%的人
+ * 然而并不满足...
+ * 现在循环一次,在map中将数字和位置都记录下来,以备后用
+ */
 
-var a = twoSum([1,2,3,4], 5);
-console.log(a);
+var twoSum1 = function(nums, target) {
+    var map = {};
+    for(var i = 0, len = nums.length; i < len; i++){
+        var res = target - nums[i];
+        if(map[res] !== undefined){
+            return [map[res], i]
+        }
+        map[nums[i]] = i;
+    }
+};
+
+/**
+ * ok,击败75%,一本满足
+ *
+ * */

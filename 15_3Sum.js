@@ -116,7 +116,7 @@ var threeSum3 = function(nums) {
     for(var i = 0, len = nums.length; i < len;){
         for(var j = i + 1; j < len;){
             var sum = arr[i] + arr[j];
-            var index = nums.indexOf(-sum);
+            var index = nums.indexOf(-sum, j + 1);
             if(index > -1 && index !== i && index !== j){
                 var res = [nums[i], nums[j], -sum];
                 var key = res.sort().join('-');
