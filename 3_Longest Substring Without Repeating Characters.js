@@ -18,7 +18,7 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-    if(s.length <=1) return s.length;
+    if(s.length <= 1) return s.length;
     var result = 1;
     for(var i = 0, len = s.length; i < len; i++){
         var res = s[i];
