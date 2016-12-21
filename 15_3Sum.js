@@ -115,14 +115,13 @@ var threeSum3 = function(nums) {
     nums = nums.sort((a, b) => a - b);
     for(var i = 0, len = nums.length; i < len;){
         for(var j = i + 1; j < len;){
-            var sum = arr[i] + arr[j];
+            var sum = nums[i] + nums[j];
             var index = nums.indexOf(-sum, j + 1);
             if(index > -1 && index !== i && index !== j){
                 var res = [nums[i], nums[j], -sum];
-                var key = res.sort().join('-');
+                var key = res.join('-');
                 !Obj[key] && result.push(res);
                 Obj[key] = true;
-                break;
             }
             j = nums.lastIndexOf(nums[j]) + 1;
         }
@@ -133,4 +132,35 @@ var threeSum3 = function(nums) {
 
 /**
  * 好了,终于超过51%了,还是不满足,下回再折腾...
+ */
+
+/**
+ * 试着用TwoSum的算法,从nums中查找一个数为target的算法
+ */
+
+var threeSum4 = function(nums) {
+    var result = [];
+    if(nums.length < 3) return result;
+    nums = nums.sort((a, b) => a - b);
+    var Obj = {};
+    for(var i = 0, len = nums.length; i < len;){
+        var target = -nums[i];
+        var map = {};
+        for(var j = i + 1; j < len; j ++){
+            var num = target - nums[j];
+            if(map[num] !== undefined){
+                var res = [-target, nums[map[num]], nums[j]];
+                if(Obj[res.join('-')]) continue;
+                result.push(res);
+                Obj[res.join('-')] = true;
+            }
+            map[nums[j]] = j;
+        }
+        i = nums.lastIndexOf(nums[i]) + 1;
+    }
+    return result;
+};
+
+/**
+ * 似乎并没有什么卵用,效率并没有提升,也不知道是不是脸黑,效率还不如threeSum3
  */
